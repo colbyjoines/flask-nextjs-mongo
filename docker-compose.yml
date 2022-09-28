@@ -13,8 +13,8 @@ services:
         stdin_open: true
         volumes:
             - ./client:/client
-    api:
-        build: ./api
+    flask:
+        build: ./flask
         image: webapp-api
         restart: always
         ports:
@@ -23,7 +23,7 @@ services:
             - webappnetwork
         command: python3 api.py
         volumes:
-            - ./api:/api
+            - ./flask:/flask
 networks:
     webappnetwork:
         driver: bridge

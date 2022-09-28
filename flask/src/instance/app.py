@@ -1,5 +1,5 @@
 from ..core.db import DbConnection
-from ...config import config
+from ..config import config
 
 from datetime import datetime
 import json

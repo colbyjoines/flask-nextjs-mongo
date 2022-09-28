@@ -1,5 +1,5 @@
 from ..core.db import DbConnection
-from .config import config
+from ...config import config
 
 from datetime import datetime
 import json
@@ -9,7 +9,7 @@ from bson import json_util
 
 app = Flask(__name__)
 
-app.config["MONGO_DB_URL"] = f"mongodb+srv://mongdb:" + config["mongodb_key"] + "@cluster0.7a9ym7j.mongodb.net/?retryWrites=true&w=majority"
+app.config["MONGO_DB_URL"] = config["mongodb_url"].replace("<password>", config["mongodb_key"])
 app.config["MONGO_DB_NAME"] = "automation-webapp"
 
 app.db = DbConnection(app).get_connection()

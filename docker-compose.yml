@@ -1,0 +1,40 @@
+version: "2"
+services:
+    client:
+        build: client
+        image: webapp-client
+        restart: always
+        ports:
+            - 3000:3000
+        links:
+            - api
+        networks:
+            - webappnetwork
+        stdin_open: true
+        volumes:
+            - ./client:/client
+    api:
+        build: ./api
+        image: webapp-api
+        restart: always
+        ports:
+            - 5000:5000
+        networks:
+            - webappnetwork
+        command: python3 api.py
+        volumes:
+            - ./api:/api
+    # mongodb:
+    #     image: mongo
+    #     restart: always
+    #     container_name: mongodb
+    #     ports:
+    #         - 27017:27017
+    #     command: mongod --noauth
+    #     networks:
+    #         - webappnetwork
+    #     volumes:
+    #         - ./data/db:/data/db
+networks:
+    webappnetwork:
+        driver: bridge
